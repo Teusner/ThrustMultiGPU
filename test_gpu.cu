@@ -15,6 +15,17 @@ int main(){
     }
 
     if (deviceCount >= 2) {
+        // Check access peer
+        int access_0, access_1;
+        cudaDeviceCanAccessPeer(&access_1, 0, 1);
+        cudaDeviceCanAccessPeer(&access_0, 1, 0);
+
+        // Enable peer access between GPU
+        cudaSetDevice(0);
+        cudaDeviceEnablePeerAccess(1, 0);
+        cudaSetDevice(1);
+        cudaDeviceEnablePeerAccess(0, 0);
+
         unsigned int size = 1000;
         cudaSetDevice(0);
         thrust::device_vector<float> a(size, 2);

@@ -29,5 +29,15 @@ int main(){
 
         cudaSetDevice(1);
         thrust::transform(a.begin(), a.end(), b.begin(), d.begin(), thrust::minus<float>());
+
+        cudaSetDevice(0);
+        unsigned int n_d = thrust::count(d.begin(), d.end(), 1);
+
+        cudaSetDevice(1);
+        unsigned int n_c = thrust::count(c.begin(), c.end(), 3);
+
+        printf("Check c = a + b : %d\n", n_c==size);
+        printf("Check d = a - b : %d\n", n_d==size);
+        
     }
 }

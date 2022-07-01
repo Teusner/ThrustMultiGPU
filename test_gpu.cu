@@ -14,7 +14,7 @@ int main(){
         printf("Device %d has compute capability %d.%d.\n", device, deviceProp.major, deviceProp.minor);
     }
 
-    if (deviceCount > 2) {
+    if (deviceCount >= 2) {
         unsigned int size = 1000;
         cudaSetDevice(0);
         thrust::device_vector<float> a(size, 2);
